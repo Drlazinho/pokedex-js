@@ -1,12 +1,16 @@
-# Construindo um Pokedex com Javascript
+# Construindo um Pokedex com Javascript (Desafio 4)
 
-Pokedex que faz requisição da PokeApi.
-App Responsiva
-Modo Noturno
+Desafio Frontend da DIO
+
+* Pokedex que faz requisição da PokeApi.
+* App Responsiva
+* Modo Noturno
 
 [Projeto Base](https://github.com/digitalinnovationone/js-developer-pokedex)
 
 ### Resultado
+
+https://pokedex-js-eta.vercel.app/
 
 <img src="imgs/img1.png"/>
 <hr/>
