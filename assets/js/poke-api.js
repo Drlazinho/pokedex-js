@@ -1,0 +1,41 @@
+const pokeApi = {}
+
+function convertPokeApiDetailToPokemon(pokeDetail) {
+  const pokemon = new Pokemon()
+  pokemon.number = pokeDetail.order;
+  pokemon.name = pokeDetail.name
+  const types = pokeDetail.types.map((typeSlot) => typeSlot.type.name)
+
+  const [type] = types
+
+  pokemon.types = types
+  pokemon.type = type
+
+ const skills = pokeDetail.abilities.map((abilitySlot) => abilitySlot.ability.name)
+
+  const [skill] = skills 
+  pokemon.skills = skills
+  pokemon.skill = skill
+
+  pokemon.photo = pokeDetail.sprites.other.dream_world.front_default
+
+
+  return pokemon
+}
+
+pokeApi.getPokemonDetail = (pokemon) => {
+  return fetch(pokemon.url)
+  .then((res) => res.json())
+  .then(convertPokeApiDetailToPokemon)
+}
+
+pokeApi.getPokemons = (offset = 0, limit = 20) => {
+  const url = `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`
+
+  return fetch(url)
+  .then((res) => res.json())
+  .then((jsonBody) => jsonBody.results)
+  .then((pokemons) => pokemons.map(pokeApi.getPokemonDetail))
+  .then((detailRequests) => Promise.all(detailRequests))
+  .then((pokemonsDetails) => pokemonsDetails)
+}
